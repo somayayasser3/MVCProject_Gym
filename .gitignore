@@ -1,0 +1,30 @@
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Bb]in/
+[Oo]bj/
+
+# Visual Studio files
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.vscode/
+
+# NuGet Packages
+*.nupkg
+packages/
+
+# Database
+*.mdf
+*.ldf
+
+# Others
+*.log
+*.tmp
+node_modules/
+wwwroot/lib/
+appsettings.Development.json
