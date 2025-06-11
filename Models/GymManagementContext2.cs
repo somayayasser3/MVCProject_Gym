@@ -6,13 +6,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GymApp.Models;
 
-public partial class GymManagementContext : DbContext
+public partial class GymManagementContext2 : DbContext
 {
-    public GymManagementContext()
+    public GymManagementContext2()
     {
     }
 
-    public GymManagementContext(DbContextOptions<GymManagementContext> options)
+    public GymManagementContext2(DbContextOptions<GymManagementContext2> options)
         : base(options)
     {
     }

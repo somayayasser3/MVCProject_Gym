@@ -6,9 +6,9 @@ namespace GymApp.Repository.ModelsRepos
 {
     public class InBodyTestRepository : IInBodyTestRepository
     {
-        private readonly GymManagementContext _context;
+        private readonly GymManagementContext2 _context;
 
-        public InBodyTestRepository(GymManagementContext context)
+        public InBodyTestRepository(GymManagementContext2 context)
         {
             _context = context;
         }
