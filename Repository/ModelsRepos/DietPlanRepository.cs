@@ -6,9 +6,9 @@ namespace GymApp.Repository.ModelsRepos
 {
     public class DietPlanRepository : IDietPlanRepository
     {
-        private readonly GymManagementContext _context;
+        private readonly GymManagementContext2 _context;
 
-        public DietPlanRepository(GymManagementContext context)
+        public DietPlanRepository(GymManagementContext2 context)
         {
             _context = context;
         }

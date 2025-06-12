@@ -6,9 +6,9 @@ namespace GymApp.Repository.ModelsRepos
 {
     public class CoachRepository : ICoachRepository
     {
-        private readonly GymManagementContext _context;
+        private readonly GymManagementContext2 _context;
 
-        public CoachRepository(GymManagementContext context)
+        public CoachRepository(GymManagementContext2 context)
         {
             _context = context;
         }

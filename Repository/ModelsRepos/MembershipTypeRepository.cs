@@ -6,9 +6,9 @@ namespace GymApp.Repository.ModelsRepos
 {
     public class MembershipTypeRepository : IMembershipTypeRepository
     {
-        private readonly GymManagementContext _context;
+        private readonly GymManagementContext2 _context;
 
-        public MembershipTypeRepository(GymManagementContext context)
+        public MembershipTypeRepository(GymManagementContext2 context)
         {
             _context = context;
         }

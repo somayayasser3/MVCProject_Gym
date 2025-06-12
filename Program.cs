@@ -1,7 +1,10 @@
 using GymApp.Models;
 using GymApp.Repository.Interfaces;
 using GymApp.Repository.ModelsRepos;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 
 namespace GymApp
 {
@@ -11,12 +14,11 @@ namespace GymApp
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-            builder.Services.AddRazorPages();
+            // Add services to the container.4
+            builder.Services.AddControllersWithViews();
+            //builder.Services.AddRazorPages();
 
-            var app = builder.Build();
-
-            builder.Services.AddDbContext<GymManagementContext>(options =>
+            builder.Services.AddDbContext<GymManagementContext2>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("GymCon")));
 
             builder.Services.AddScoped<IClassRepository, ClassRepository>();
@@ -26,25 +28,36 @@ namespace GymApp
             builder.Services.AddScoped<IMembershipTypeRepository, MembershipTypeRepository>();
             builder.Services.AddScoped<IProgramRepository, ProgramRepository>();
             builder.Services.AddScoped<ITraineeRepository, TraineeRepository>();
+            builder.Services.AddIdentity<ApplicationUser,IdentityRole>(op =>
+            {
+                op.Password.RequiredLength = 4;
+                op.Password.RequireNonAlphanumeric = false;
+                op.Password.RequireUppercase = false;
+            }).AddEntityFrameworkStores<GymManagementContext2>();
+            builder.Services.AddSession();
+            var app = builder.Build();
 
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
-                app.UseExceptionHandler("/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
+                app.UseExceptionHandler("/Home/Error");
+                //app.UseExceptionHandler("/Error");
+                //// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                //app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
+            app.UseSession();
+            app.UseStaticFiles();
 
             app.UseRouting();
 
             app.UseAuthorization();
 
-            app.MapStaticAssets();
-            app.MapRazorPages()
-               .WithStaticAssets();
+            app.MapControllerRoute(
+              name: "default",
+              pattern: "{controller=Home}/{action=Index}/{id?}").WithStaticAssets();
 
             app.Run();
         }
