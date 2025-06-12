@@ -1,7 +1,10 @@
 using GymApp.Models;
 using GymApp.Repository.Interfaces;
 using GymApp.Repository.ModelsRepos;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 
 namespace GymApp
 {
@@ -25,6 +28,12 @@ namespace GymApp
             builder.Services.AddScoped<IMembershipTypeRepository, MembershipTypeRepository>();
             builder.Services.AddScoped<IProgramRepository, ProgramRepository>();
             builder.Services.AddScoped<ITraineeRepository, TraineeRepository>();
+            builder.Services.AddIdentity<ApplicationUser,IdentityRole>(op =>
+            {
+                op.Password.RequiredLength = 4;
+                op.Password.RequireNonAlphanumeric = false;
+                op.Password.RequireUppercase = false;
+            }).AddEntityFrameworkStores<GymManagementContext2>();
             builder.Services.AddSession();
             var app = builder.Build();
 
